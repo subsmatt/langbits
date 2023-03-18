@@ -1,2 +1,2 @@
-# langwall
-Learn language by adding new words to your knowledge 'wall'
+# langbits
+Learn language by adding new words to your knowledge base.
