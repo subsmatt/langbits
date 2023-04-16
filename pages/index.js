@@ -2,9 +2,7 @@ import LangBitsApp from "../src/components/LangBitsApp";
 
 function AppShell() {
     return (
-        <>
-            <LangBitsApp/>
-        </>
+        <LangBitsApp/>
     );
 }
 
