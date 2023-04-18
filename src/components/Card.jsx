@@ -1,5 +1,5 @@
 function Card(props) {
-    const {rec} = props;
+    const {rec, deleteRecord, updateRecord} = props;
 
     return (
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 my-4" key={rec.id}>
@@ -17,12 +17,12 @@ function Card(props) {
                     <div>{rec.type}</div>
                     <div>
                         <span className="mx-2">
-                            <a href="#" onClick={() => {alert('updateCard function...');}}>
+                            <a href="#" onClick={() => {updateRecord({id: rec.id});}}>
                                 <i className="fa fa-edit"/>
                             </a>
                         </span>
                         <span className="mx-2">
-                            <a href="#" onClick={() => {alert('deleteCard function...');}}>
+                            <a href="#" onClick={() => {deleteRecord(rec.id);}}>
                                 <i className="fa fa-trash"/>
                             </a>
                         </span>
