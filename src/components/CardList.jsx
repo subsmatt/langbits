@@ -1,6 +1,7 @@
 import Card from "./Card";
 import CardAdd from "./CardAdd";
 import useRestRequest, {REQUEST_STATUS} from "../hooks/useRestRequest";
+import CardModal from "./CardModal/CardModal";
 
 function CardList() {
     // Load data
@@ -18,6 +19,7 @@ function CardList() {
     return (
         <>
             <CardAdd insertRecord={insertRecord}/>
+            <CardModal/>
             <div className="row">
                 {data.map(
                     function(rec) {
