@@ -3,10 +3,10 @@ import Header from "./Header";
 
 function LangBitsApp() {
     return (
-        <>
+        <div className="container">
             <Header/>
             <Content/>
-        </>
+        </div>
     );
 }
 

@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 const CardModalContext = createContext({
-    //modalShow: false,
-    //setModalShow: () => {},
+    modalShow: false,
+    setModalShow: () => {},
     modalCardId: 0,
     setModalCardId: () => {},
     modalCardWord: "",

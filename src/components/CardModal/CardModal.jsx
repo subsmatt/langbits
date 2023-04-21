@@ -1,30 +1,27 @@
 import { useContext } from "react";
 import { CardModalContext } from "../../context/CardModalContext";
+import CardModalHeader from "./CardModalHeader";
+import CardModalFooter from "./CardModalFooter";
+import CardModalBody from "./CardModalBody";
 
 function CardModal(props) {
-    //const modalShow = true;
-    //let cssShowHide = modalShow && modalShow === true ? "modal show-modal" : "modal hide-modal";
-    const {modalCardId, modalCardWord, setModalCardWord, modalCardDesc, setModalCardDesc} = useContext(CardModalContext);
+    const {modalShow} = useContext(CardModalContext);
+    let cssShowHide = modalShow && modalShow === true ? "modal show-modal d-block" : "modal hide-modal";
+    let cssBackdropShowHide = modalShow && modalShow === true ? "fade modal-backdrop show" : "";
 
     return (
-        <div className="modal fade" id="cardModalContainer" tabIndex={-1} role="dialog">
-            <div className="modal-dialog" role={"document"}>
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title">Modal title</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                        <p>#{modalCardId}</p>
-                        <p>{modalCardWord}</p>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-primary" onClick={() => {console.log('Save changes...');}}>Save changes</button>
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <>
+            <div role="dialog" className={cssShowHide} id="cardModalContainer">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <CardModalHeader />
+                        <CardModalBody />
+                        <CardModalFooter insertRecord={props.insertRecord} updateRecord={props.updateRecord}/>
                     </div>
                 </div>
             </div>
-        </div>
+            <div className={cssBackdropShowHide} id="cardModalBackdrop"></div>
+        </>
     );
 }
 

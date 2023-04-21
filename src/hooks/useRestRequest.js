@@ -33,13 +33,9 @@ function useRestRequest() {
 
     function insertRecord(aoRec){
         const lsFuncName = "useRestRequst>insertRecord";
-        console.log(`${lsFuncName}...`);
-
-        // TEMP copy the first record
-        aoRec = data[0];
-
+        
         // Check if records is in correct format
-        if(aoRec && aoRec.word) {
+        if(aoRec && (aoRec.word && aoRec.desc)) {
             const originalRecords = [...data];
 
             // Set newId to be max id among existing records + 1
@@ -57,19 +53,16 @@ function useRestRequest() {
 
             const newRecord = {
                 "id": newId.toString(),
-                //"lang": "es",
-                "word": aoRec.word ? aoRec.word + newId : "word(new)",
-                //"desc_lang": "en",
-                "desc": aoRec.desc ? aoRec.desc + newId : "desc(new)",
-                //"tags": [
-                //"fruit",
-                //"food"
-                //],
-                //"type": "noun",
-                //"hits": 0,
-                //"examples": [],
-                //"familiar": false,
-                //"iknowthis": false
+                "lang": "es",
+                "word": aoRec.word ? aoRec.word : "word(new)",
+                "desc_lang": "en",
+                "desc": aoRec.desc ? aoRec.desc : "desc(new)",
+                "tags": [],
+                "type": "noun",
+                "hits": 0,
+                "examples": [],
+                "familiar": false,
+                "iknowthis": false
             };
 
             async function handleInsert(aoNewRec) {
@@ -91,19 +84,20 @@ function useRestRequest() {
     }
 
     function updateRecord(aoRec){
-        const lsFuncName = "useRestRequst>deleteRecord";
+        const lsFuncName = "useRestRequst>updateRecord";
 
         if (aoRec && aoRec.id) {
-            const originalData = [...data];
+            const originalRecords = [...data];
 
-            const originalRecord = originalData.find(function (rec){
+            const originalRecord = originalRecords.find(function (rec){
                 return rec.id == aoRec.id;
             });
-            const updatedRecord = {...originalRecord, word: originalRecord.word + "(upd)", desc: originalRecord.desc + "(upd)"};
+
+            const updatedRecord = {...originalRecord, word: aoRec.word, desc: aoRec.desc};
 
             try {
                 setData(function(){
-                    return originalData.map(function (rec) {
+                    return originalRecords.map(function (rec) {
                         return rec.id != aoRec.id ? rec : updatedRecord;
                     });
                 });
@@ -120,8 +114,7 @@ function useRestRequest() {
 
     function deleteRecord(asId){
         const lsFuncName = "useRestRequst>deleteRecord";
-        console.log(`${lsFuncName} id[${asId}]`);
-
+        
         // Check if Id is valid
         if(asId) {
             const originalRecords = [...data];

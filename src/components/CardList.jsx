@@ -8,7 +8,7 @@ function CardList() {
     const {data, requestStatus, error, deleteRecord, insertRecord, updateRecord} = useRestRequest();
 
     // Show Error and abort if loading failed
-    if (requestStatus === REQUEST_STATUS.FAILURE || data === undefined || data.length === 0) {
+    if (requestStatus === REQUEST_STATUS.FAILURE) {
         return (
             <div className="text-center text-danger my-5">
                 ERROR: <b>Cannot load data. {error}</b>
@@ -16,10 +16,19 @@ function CardList() {
         );
     }
 
+    // Show Error and abort if loading failed
+    if (data === undefined || data.length === 0) {
+        return (
+            <div className="text-center text-info my-5">
+                INFO: <b>No data found.</b>
+            </div>
+        );
+    }
+
     return (
         <>
-            <CardAdd insertRecord={insertRecord}/>
-            <CardModal/>
+            <CardModal insertRecord={insertRecord} updateRecord={updateRecord}/>
+            <CardAdd/>
             <div className="row">
                 {data.map(
                     function(rec) {
