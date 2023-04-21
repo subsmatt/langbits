@@ -3,7 +3,7 @@ import useCardModal from "../hooks/useCardModal";
 import { CardModalContext, CardModalProvider } from "../context/CardModalContext";
 
 function Content(){
-    const contextValueCardModal = useCardModal();
+    const contextValueCardModal = useCardModal();    
 
     return (
         <CardModalContext.Provider value={contextValueCardModal}>

@@ -1,9 +1,13 @@
+import {ControlPanelContext} from "../context/ControlPanelContext";
+import { useContext } from "react";
 import Card from "./Card";
 import CardAdd from "./CardAdd";
 import useRestRequest, {REQUEST_STATUS} from "../hooks/useRestRequest";
 import CardModal from "./CardModal/CardModal";
 
 function CardList() {
+    const {searchQuery} = useContext(ControlPanelContext);
+
     // Load data
     const {data, requestStatus, error, deleteRecord, insertRecord, updateRecord} = useRestRequest();
 
@@ -30,10 +34,16 @@ function CardList() {
             <CardModal insertRecord={insertRecord} updateRecord={updateRecord}/>
             <CardAdd/>
             <div className="row">
-                {data.map(
-                    function(rec) {
-                        return(
-                            <Card key={rec.id} rec={rec} deleteRecord={deleteRecord} updateRecord={updateRecord}/>
+                {data.filter(function(rec){
+                        if (Object.hasOwn(rec, "word") && rec.word !== null && Object.hasOwn(rec, "desc") && rec.desc !== null) {
+                            return rec.word.toLowerCase().includes(searchQuery) || rec.desc.toLowerCase().includes(searchQuery);
+                        } else {
+                            console.log("ERROR: malformed data, check that both 'word' and 'desc' properties are defined.");
+                            return false;
+                        }
+                    }).map(function(rec){                        
+                        return (
+                            <Card key={rec.id} rec={rec} updateRecord={updateRecord} insertRecord={insertRecord} deleteRecord={deleteRecord}/>
                         );
                     }
                 )}

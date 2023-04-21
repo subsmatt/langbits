@@ -11,7 +11,7 @@ function CardModalBody(){
                     <div className="col-md-12">
                         <div className="rec-word">
                             <label>Word</label>
-                            <input type="text" className="form-control" autoFocus placeholder="new word (autofocus)" value={modalCardWord} onChange={(e) => {setModalCardWord(e.target.value);}}/>
+                            <input type="text" className="form-control" autoFocus placeholder="new word" value={modalCardWord} onChange={(e) => {setModalCardWord(e.target.value);}}/>
                         </div>
                     </div>
                     <div className="col-md-12">
