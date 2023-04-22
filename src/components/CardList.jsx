@@ -29,6 +29,17 @@ function CardList() {
         );
     }
 
+    function sortByDescLength(a, b){
+        const descA = a.desc ? a.desc.length : 0;
+        const descB = b.desc ? b.desc.length : 0;
+
+        return descA > descB ? -1 : descA < descB ? 1 : 0;
+    }
+
+    function sortByDesc(a, b) {
+        return a.desc < b.desc ? -1 : a.desc > b.desc ? 1 : 0;
+    }
+
     return (
         <>
             <CardModal insertRecord={insertRecord} updateRecord={updateRecord}/>
@@ -41,12 +52,12 @@ function CardList() {
                             console.log("ERROR: malformed data, check that both 'word' and 'desc' properties are defined.");
                             return false;
                         }
-                    }).map(function(rec){                        
+                    }).sort(sortByDesc).map(function(rec){                        
                         return (
                             <Card key={rec.id} rec={rec} updateRecord={updateRecord} insertRecord={insertRecord} deleteRecord={deleteRecord}/>
                         );
-                    }
-                )}
+                    })
+                }
             </div>
         </>
     );
