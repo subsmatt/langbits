@@ -6,7 +6,7 @@ import useRestRequest, {REQUEST_STATUS} from "../hooks/useRestRequest";
 import CardModal from "./CardModal/CardModal";
 
 function CardList() {
-    const {searchQuery} = useContext(ControlPanelContext);
+    const {searchQuery, searchType} = useContext(ControlPanelContext);
 
     // Load data
     const {data, requestStatus, error, deleteRecord, insertRecord, updateRecord} = useRestRequest();
@@ -46,10 +46,12 @@ function CardList() {
             <CardAdd/>
             <div className="row">
                 {data.filter(function(rec){
-                        if (Object.hasOwn(rec, "word") && rec.word !== null && Object.hasOwn(rec, "desc") && rec.desc !== null) {
+                        if (Object.hasOwn(rec, "word") && rec.word !== null 
+                         && Object.hasOwn(rec, "desc") && rec.desc !== null
+                         && Object.hasOwn(rec, "type") && (searchType === "" || rec.type === searchType)
+                        ) {
                             return rec.word.toLowerCase().includes(searchQuery) || rec.desc.toLowerCase().includes(searchQuery);
                         } else {
-                            console.log("ERROR: malformed data, check that both 'word' and 'desc' properties are defined.");
                             return false;
                         }
                     }).sort(sortByDesc).map(function(rec){                        

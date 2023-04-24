@@ -3,14 +3,14 @@ import { ControlPanelContext } from "../context/ControlPanelContext";
 
 function ControlPanel() {
     // Get ControlPanel context
-    const {searchQuery, setSearchQuery} = useContext(ControlPanelContext);
+    const {searchQuery, setSearchQuery, searchType, setSearchType} = useContext(ControlPanelContext);
 
     return (
         <div className="langbits-controlpanel">
             <ul className="d-flex p-0">
                 <li className="d-flex flex-column col-3">
-                    <select className="form-select" disabled={true} aria-label="Word type">
-                        <option defaultValue={""}>All words</option>
+                    <select className="form-select" aria-label="Word type" onChange={(event) => setSearchType(event.target.value)}>
+                        <option defaultValue={""} value="">All words</option>
                         <option value="noun">Nouns</option>
                         <option value="verb">Verbs</option>
                         <option value="adjective">Adjectives</option>
