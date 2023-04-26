@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { sampleData } from "../data/sampleData";
+import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 export const REQUEST_STATUS = {
@@ -7,6 +8,8 @@ export const REQUEST_STATUS = {
     SUCCESS: "success",
     FAILURE: "failure"
 };
+
+const restUrl = "api/cards";
 
 function useRestRequest() {
     const [data, setData] = useState([]);
@@ -17,13 +20,15 @@ function useRestRequest() {
         async function loadData() {
             try {
                 // Get data from a file
-                const result = {
-                    data: sampleData
-                };
+                // const result = {
+                //     data: sampleData
+                // };
+                const result = await axios.get(restUrl);
                 setRequestStatus(REQUEST_STATUS.SUCCESS);
                 setData(result.data);
             }
             catch (e){
+                console.log(`sms:error: `, e);
                 setRequestStatus(REQUEST_STATUS.FAILURE);
                 setError(e);
             }
@@ -32,7 +37,7 @@ function useRestRequest() {
         loadData();
     }, []);
 
-    function insertRecord(aoRec){
+    function insertRecord(aoRec, doneCallback){
         const lsFuncName = "useRestRequst>insertRecord";
         
         // Check if records is in correct format
@@ -68,18 +73,38 @@ function useRestRequest() {
                 "iknowthis": false
             };
 
-            async function handleInsert(aoNewRec) {
+            // async function handleInsert(aoNewRec) {
+            //     try {
+            //         setData([...originalRecords, aoNewRec]);
+            //         setRequestStatus(REQUEST_STATUS.SUCCESS);
+            //     } catch (err) {
+            //         console.log(`ERROR:${lsFuncName}`, err);
+            //         setRequestStatus(REQUEST_STATUS.FAILURE);
+            //         setData(originalRecords);
+            //     }
+            // }
+
+            // handleInsert(newRecord);
+
+            const newRecords = [newRecord, ...data];
+
+            async function delayFunction(){
                 try {
-                    setData([...originalRecords, aoNewRec]);
-                    setRequestStatus(REQUEST_STATUS.SUCCESS);
+                    setData(newRecords);
+                    await axios.post(`${restUrl}/99999`, newRecord);
+                    if (doneCallback){
+                        doneCallback();
+                    }
                 } catch (err) {
-                    console.log(`ERROR:${lsFuncName}`, err);
-                    setRequestStatus(REQUEST_STATUS.FAILURE);
+                    console.log("error thrown inside delayFunciton: ", err);
+                    if (doneCallback){
+                        doneCallback();
+                    }
                     setData(originalRecords);
                 }
             }
-
-            handleInsert(newRecord);
+    
+            delayFunction();
         } else {
             console.log(`ERROR:${lsFuncName} - Malformed record`);
             setRequestStatus(REQUEST_STATUS.FAILURE);
@@ -97,31 +122,54 @@ function useRestRequest() {
             });
 
             const updatedRecord = {...originalRecord, ...aoRec};
-            setTimeout(function(){
+            
+            const newRecords = data.map(function(rec){
+                return rec.id === updatedRecord.id ? updatedRecord : rec;
+            });
+
+            async function delayFunction(){
                 try {
-                    setData(function(){
-                        return originalRecords.map(function (rec) {
-                            return rec.id !== aoRec.id ? rec : updatedRecord;
-                        });
-                    });
-    
+                    setData(newRecords);
+                    await axios.put(`${restUrl}/${updatedRecord.id}`, updatedRecord);
                     if (doneCallback){
                         doneCallback();
                     }
                 } catch (err) {
-                    console.log(`ERROR:${lsFuncName}`, err);
-                    setRequestStatus(REQUEST_STATUS.FAILURE);
+                    console.log("error thrown inside delayFunciton: ", err);
+                    if (doneCallback){
+                        doneCallback();
+                    }
                     setData(originalRecords);
                 }
+            }
+    
+            delayFunction();
 
-            }, 1000);
+            // setTimeout(function(){
+            //     try {
+            //         setData(function(){
+            //             return originalRecords.map(function (rec) {
+            //                 return rec.id !== aoRec.id ? rec : updatedRecord;
+            //             });
+            //         });
+    
+            //         if (doneCallback){
+            //             doneCallback();
+            //         }
+            //     } catch (err) {
+            //         console.log(`ERROR:${lsFuncName}`, err);
+            //         setRequestStatus(REQUEST_STATUS.FAILURE);
+            //         setData(originalRecords);
+            //     }
+
+            // }, 1000);
         } else {
             console.log(`ERROR:${lsFuncName} - Invalid Reocrd/Id`);
             setRequestStatus(REQUEST_STATUS.FAILURE);
         }
     }
 
-    function deleteRecord(asId){
+    function deleteRecord(asId, doneCallback){
         const lsFuncName = "useRestRequst>deleteRecord";
         
         // Check if Id is valid
@@ -131,18 +179,39 @@ function useRestRequest() {
                 return rec.id !== asId;
             });
 
-            async function handleDelete() {
+            const originalRecord = originalRecords.find(function (rec){
+                return rec.id === asId;
+            });
+            // async function handleDelete() {
+            //     try {
+            //         setData(newRecords);
+            //         setRequestStatus(REQUEST_STATUS.SUCCESS);
+            //     } catch (err) {
+            //         console.log(`ERROR:${lsFuncName}`, err);
+            //         setRequestStatus(REQUEST_STATUS.FAILURE);
+            //         setData(originalRecords);
+            //     }
+            // }
+
+            // handleDelete();
+
+            async function delayFunction(){
                 try {
                     setData(newRecords);
-                    setRequestStatus(REQUEST_STATUS.SUCCESS);
+                    await axios.delete(`${restUrl}/${asId}`, originalRecord);
+                    if (doneCallback){
+                        doneCallback();
+                    }
                 } catch (err) {
-                    console.log(`ERROR:${lsFuncName}`, err);
-                    setRequestStatus(REQUEST_STATUS.FAILURE);
+                    console.log("error thrown inside delayFunciton: ", err);
+                    if (doneCallback){
+                        doneCallback();
+                    }
                     setData(originalRecords);
                 }
             }
-
-            handleDelete();
+    
+            delayFunction();
         } else {
             console.log(`ERROR:${lsFuncName} - Invalid Id`);
             setRequestStatus(REQUEST_STATUS.FAILURE);

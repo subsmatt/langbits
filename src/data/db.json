@@ -1,0 +1,46 @@
+{
+  "cards": [
+    {
+      "id": "1214060d-49ac-4a2c-95e6-d11fcf6567d6",
+      "lang": "es",
+      "word": "naranja",
+      "desc_lang": "en",
+      "desc": "orange",
+      "tags": [],
+      "type": "noun",
+      "hits": 0,
+      "examples": [],
+      "familiar": false,
+      "iknowthis": false
+    },
+    {
+      "id": "a4ff50f7-7f78-4e6c-ae9f-7965814ca909",
+      "lang": "es",
+      "word": "queso",
+      "desc_lang": "en",
+      "desc": "cheese",
+      "tags": [],
+      "type": "noun",
+      "hits": 0,
+      "examples": [],
+      "familiar": false,
+      "iknowthis": false
+    },
+    {
+      "id": "1bae1ac8-5297-44ae-9bae-d3bd3b18ebc8",
+      "lang": "es",
+      "word": "manzana",
+      "desc_lang": "en",
+      "desc": "apple",
+      "tags": [
+        "fruit",
+        "food"
+      ],
+      "type": "noun",
+      "hits": 0,
+      "examples": [],
+      "familiar": false,
+      "iknowthis": false
+    }
+  ]
+}

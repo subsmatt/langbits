@@ -19,7 +19,7 @@ function CardList() {
             </div>
         );
     }
-
+    
     // Show Error and abort if loading failed
     if (data === undefined || data.length === 0) {
         return (
