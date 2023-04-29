@@ -8,7 +8,9 @@ const CardModalContext = createContext({
     modalCardWord: "",
     setModalCardWord: () => {},
     modalCardDesc: "",
-    setModalCardDesc: () => {}
+    setModalCardDesc: () => {},
+    modalCardWordType: "",
+    setModalCardWordType: () => {}
 });
 
 function CardModalProvider({children, value}){

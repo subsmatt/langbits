@@ -5,12 +5,14 @@ function useCardModal() {
     const [modalCardId, setModalCardId] = useState(0);
     const [modalCardWord, setModalCardWord] = useState("");
     const [modalCardDesc, setModalCardDesc] = useState("");
+    const [modalCardWordType, setModalCardWordType] = useState("");
 
     return {
         modalShow, setModalShow,
         modalCardId, setModalCardId,
         modalCardWord, setModalCardWord,
-        modalCardDesc, setModalCardDesc
+        modalCardDesc, setModalCardDesc,
+        modalCardWordType, setModalCardWordType
     };
 }
 

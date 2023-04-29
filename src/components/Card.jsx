@@ -5,12 +5,13 @@ import CardFamiliar from "./CardFamiliar";
 
 function Card(props) {
     const {rec, deleteRecord, updateRecord} = props;
-    const {setModalShow, setModalCardId, setModalCardWord, setModalCardDesc} = useContext(CardModalContext);
+    const {setModalShow, setModalCardId, setModalCardWord, setModalCardDesc, setModalCardWordType} = useContext(CardModalContext);
 
     function updateCard(aoRec){
         setModalCardId(aoRec.id);
         setModalCardWord(aoRec.word);
         setModalCardDesc(aoRec.desc);
+        setModalCardWordType(aoRec.type);
         setModalShow(true);
     }
 

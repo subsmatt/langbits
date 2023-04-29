@@ -27,19 +27,20 @@ export default async function handler(req, res) {
             console.log(`Method ${method} not implemented`);
     }
 
-    //const jsonFile = path.resolve("./", "db.json");
-
     async function putMethod() {
         try {
             const jsonFile = path.resolve("./src/data", "db.json");
             const readFileData = await readFile(jsonFile);
+
             await delay(1000);
+            
             const sampleData = JSON.parse(readFileData).cards;
     
             if (sampleData){
                 const newCardsArray = sampleData.map(function (rec){
                     return rec.id == id ? recordFromBody : rec;
                 });
+
                 writeFile(jsonFile, JSON.stringify({cards: newCardsArray}, null, 2));
 
                 res.setHeader("Content-Type", "application/json");
@@ -56,13 +57,16 @@ export default async function handler(req, res) {
         try {
             const jsonFile = path.resolve("./src/data", "db.json");
             const readFileData = await readFile(jsonFile);
+            
             await delay(1000);
+            
             const sampleData = JSON.parse(readFileData).cards;
     
             if (sampleData){
                 const newCardsArray = sampleData.filter(function (rec){
                     return rec.id != id;
                 });
+
                 writeFile(jsonFile, JSON.stringify({cards: newCardsArray}, null, 2));
 
                 res.setHeader("Content-Type", "application/json");
@@ -79,16 +83,12 @@ export default async function handler(req, res) {
         try {
             const jsonFile = path.resolve("./src/data", "db.json");
             const readFileData = await readFile(jsonFile);
+            
             await delay(1000);
+            
             const sampleData = JSON.parse(readFileData).cards;
 
             if (sampleData){
-                // const idNew = sampleData.reduce((accumulator, currentValue) => {
-                //     const idCurrent = parseInt(currentValue.id);
-                //     return idCurrent > accumulator ? idCurrent : accumulator;
-                // }, 0) + 1;
-                // const newCardRec = {...recordFromBody, id: idNew.toString()};
-
                 const newId = uuidv4();
                 const newCardRec = {...recordFromBody, id: newId};
                 const newCardsArray = [newCardRec, ...sampleData];
@@ -97,7 +97,7 @@ export default async function handler(req, res) {
 
                 res.setHeader("Content-Type", "application/json");
                 res.status(200).send(JSON.stringify(newCardRec, null, 2));
-                console.log(`POST /api/cards/${idNew} status: 200`);
+                console.log(`POST /api/cards/${newId} status: 200`);
             }
         } catch(err) {
             res.status(500).send(`POST /api/cards/${id} Status: 500`);

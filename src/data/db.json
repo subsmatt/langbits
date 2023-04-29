@@ -1,6 +1,58 @@
 {
   "cards": [
     {
+      "id": "7c7054dc-9e9d-4abf-a82c-185933371012",
+      "lang": "es",
+      "word": "comer",
+      "desc_lang": "en",
+      "desc": "to eat",
+      "tags": [],
+      "type": "verb",
+      "hits": 0,
+      "examples": [],
+      "familiar": false,
+      "iknowthis": false
+    },
+    {
+      "id": "06bf1628-ead7-4fc4-90d9-80a8019632b3",
+      "lang": "es",
+      "word": "aceite",
+      "desc_lang": "en",
+      "desc": "oil",
+      "tags": [],
+      "type": "noun",
+      "hits": 0,
+      "examples": [],
+      "familiar": false,
+      "iknowthis": false
+    },
+    {
+      "id": "88d0af7d-3d80-4b2a-a706-d8d6dec5d894",
+      "lang": "es",
+      "word": "agua",
+      "desc_lang": "en",
+      "desc": "water",
+      "tags": [],
+      "type": "noun",
+      "hits": 0,
+      "examples": [],
+      "familiar": false,
+      "iknowthis": false
+    },
+    {
+      "id": "e5cc819c-7248-4dbb-b416-447bffd265cd",
+      "lang": "es",
+      "word": "pan",
+      "desc_lang": "en",
+      "desc": "bread",
+      "tags": [],
+      "type": "noun",
+      "hits": 0,
+      "examples": [],
+      "familiar": false,
+      "iknowthis": false
+    },
+    {
       "id": "1214060d-49ac-4a2c-95e6-d11fcf6567d6",
       "lang": "es",
       "word": "naranja",
@@ -10,7 +62,7 @@
       "type": "noun",
       "hits": 0,
       "examples": [],
-      "familiar": false,
+      "familiar": true,
       "iknowthis": false
     },
     {
@@ -23,7 +75,7 @@
       "type": "noun",
       "hits": 0,
       "examples": [],
-      "familiar": false,
+      "familiar": true,
       "iknowthis": false
     },
     {
@@ -39,7 +91,7 @@
       "type": "noun",
       "hits": 0,
       "examples": [],
-      "familiar": false,
+      "familiar": true,
       "iknowthis": false
     }
   ]
