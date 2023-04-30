@@ -22,9 +22,39 @@ export default async function handler(req, res) {
         case "DELETE":
             deleteMethod();
             break;
+        case "GET":
+            getMethod();
+            break;
         default:
             res.status(501).send(`Method ${method} not implemented`);
             console.log(`Method ${method} not implemented`);
+    }
+
+    async function getMethod() {
+        try {
+            const jsonFile = path.resolve("./src/data", "db.json");
+            const readFileData = await readFile(jsonFile);
+
+            await delay(1000);
+            
+            const sampleData = JSON.parse(readFileData).cards;
+    
+            // if (sampleData){
+            //     const newCardsArray = sampleData.map(function (rec){
+            //         return rec.id == id ? recordFromBody : rec;
+            //     });
+
+            //     writeFile(jsonFile, JSON.stringify({cards: newCardsArray}, null, 2));
+
+            //     res.setHeader("Content-Type", "application/json");
+            //     res.status(200).send(JSON.stringify(recordFromBody, null, 2));
+            //     console.log(`PUT /api/cards/${id} status: 200`);
+            // }
+            return JSON.parse(readFileData);
+        } catch(err) {
+            //res.status(500).send(`PUT /api/cards/${id} Status: 500`);
+            console.log(`GET /api/cards Error: `, err);
+        }
     }
 
     async function putMethod() {

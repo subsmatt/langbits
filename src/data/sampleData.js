@@ -1,5 +1,4 @@
-export const sampleData = [];
-const tmpsampleData = [
+export const sampleData = [
     {
         id: "1bae1ac8-5297-44ae-9bae-d3bd3b18ebc8",
         lang: "es",

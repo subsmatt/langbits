@@ -9,7 +9,7 @@ function CardList() {
     const {searchQuery, searchType} = useContext(ControlPanelContext);
 
     // Load data
-    const {data, requestStatus, error, deleteRecord, insertRecord, updateRecord} = useRestRequest();
+    const {cardsData: data, requestStatus, cardsDataError: error, deleteRecord, insertRecord, updateRecord} = useRestRequest();
 
     // Show Error and abort if loading failed
     if (requestStatus === REQUEST_STATUS.FAILURE) {
