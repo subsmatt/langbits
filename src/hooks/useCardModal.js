@@ -6,13 +6,17 @@ function useCardModal() {
     const [modalCardWord, setModalCardWord] = useState("");
     const [modalCardDesc, setModalCardDesc] = useState("");
     const [modalCardWordType, setModalCardWordType] = useState("");
+    const [tagNamesNewValue, setTagNamesNewValue] = useState("");
+    const [modalCardTagIds, setModalCardTagIds] = useState([]);
 
     return {
         modalShow, setModalShow,
         modalCardId, setModalCardId,
         modalCardWord, setModalCardWord,
         modalCardDesc, setModalCardDesc,
-        modalCardWordType, setModalCardWordType
+        modalCardWordType, setModalCardWordType,
+        tagNamesNewValue, setTagNamesNewValue,
+        modalCardTagIds, setModalCardTagIds
     };
 }
 

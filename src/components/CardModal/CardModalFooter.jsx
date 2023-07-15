@@ -1,9 +1,23 @@
 import { useContext } from "react";
 import { CardModalContext } from "../../context/CardModalContext";
+import { CardsContext } from "../../context/CardsContext";
 
-function CardModalFooter(props){
-    const {setModalShow, modalCardId, setModalCardId, modalCardWord, setModalCardWord, modalCardDesc, setModalCardDesc, modalCardWordType, setModalCardWordType} = useContext(CardModalContext);
-    const {insertRecord, updateRecord} = props;
+function CardModalFooter(){
+    const {
+        setModalShow, 
+        modalCardId, 
+        setModalCardId, 
+        modalCardWord, 
+        setModalCardWord, 
+        modalCardDesc, 
+        setModalCardDesc, 
+        modalCardWordType, 
+        setModalCardWordType,
+        modalCardTagIds,
+        tagNamesNewValue
+    } = useContext(CardModalContext);
+    
+    const {createCard, updateCard} = useContext(CardsContext);
     
     function closeModal() {
         setModalCardId(0);
@@ -17,13 +31,13 @@ function CardModalFooter(props){
         <div className="modal-footer">
             {modalCardId === 0 && (
                 <button type="button" className="btn btn-info" onClick={() => {
-                    insertRecord({word: modalCardWord, desc: modalCardDesc, type: modalCardWordType});
+                    createCard({word: modalCardWord, desc: modalCardDesc, type: modalCardWordType}, modalCardTagIds, tagNamesNewValue);
                     closeModal();
                 }}>Add</button>
             )}
             {modalCardId !== 0 && (
                 <button type="button" className="btn btn-primary" onClick={() => {
-                    updateRecord({id: modalCardId, word: modalCardWord, desc: modalCardDesc, type: modalCardWordType});
+                    updateCard({id: modalCardId, word: modalCardWord, desc: modalCardDesc, type: modalCardWordType}, undefined, undefined, undefined, modalCardTagIds, tagNamesNewValue);
                     closeModal();
                 }}>Save</button>
             )}

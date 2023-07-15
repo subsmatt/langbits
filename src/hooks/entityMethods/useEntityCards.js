@@ -27,8 +27,9 @@ function useEntityCards() {
     } = useGenCrudMethods(sampleData);
 
     function createCardEntity(aoRecord) {
+        const cardId = uuidv4();
         const newRecord = {...schemaRecord, 
-            id: uuidv4(),
+            id: cardId,
             word: aoRecord.word ? aoRecord.word : "unknown word",
             desc: aoRecord.desc ? aoRecord.desc : "unknown desc",
             type: aoRecord.type ? aoRecord.type : "unknown",
@@ -36,21 +37,46 @@ function useEntityCards() {
         };
 
         createRecord(newRecord);
+        return cardId;
     }
 
-    function updateCardEntity(aoRecord) {
+    function updateCardEntity(aoRecord, important, pinned) {
         const updatedRecord = {...schemaRecord, 
             id: aoRecord.id,
             word: aoRecord.word ? aoRecord.word : "unknown word",
             desc: aoRecord.desc ? aoRecord.desc : "unknown desc",
-            type: aoRecord.type ? aoRecord.type : "unknown"
+            type: aoRecord.type ? aoRecord.type : "unknown",
+            familiar: aoRecord.familiar === undefined ? false : aoRecord.familiar 
         };
 
         updateRecord(aoRecord.id, updatedRecord);
+        
+        //// check if Attributes record exists
+        //const cardAttributes = cardAttributesData.find(rec => rec.cardId === aoRecord.id);
+        //if (cardAttributes){
+        //    updateCardAttributesData(cardAttributes.id, {
+        //        pinned: pinned === undefined ? undefined : Number(pinned),
+        //        important: important === undefined ? undefined : Number(important),
+        //        updateDate: new Date().toISOString()
+        //    });
+        //} else {
+        //    createCardAttributesData({
+        //        id: uuidv4(),
+        //        cardId: aoRecord.id,
+        //        pinned: pinned === undefined ? undefined : Number(pinned),
+        //        important: important === undefined ? undefined : Number(important),
+        //        updateDate: new Date().toISOString()
+        //    });
+        //}
     }
 
     function deleteCardEntity(asId) {
         deleteRecord(asId);
+
+        //// delete any associated Attribute records
+        //cardAttributesData
+        //.filter(rec => rec.cardId === asId)
+        //.forEach(rec => deleteCardAttributesData(rec.id));
     }
 
     return {data, error, createCardEntity, updateCardEntity, deleteCardEntity};

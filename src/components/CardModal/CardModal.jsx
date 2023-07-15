@@ -3,6 +3,7 @@ import { CardModalContext } from "../../context/CardModalContext";
 import CardModalHeader from "./CardModalHeader";
 import CardModalFooter from "./CardModalFooter";
 import CardModalBody from "./CardModalBody";
+import CardModalTags from "./CardModalTags";
 
 function CardModal(props) {
     const {modalShow} = useContext(CardModalContext);
@@ -16,7 +17,8 @@ function CardModal(props) {
                     <div className="modal-content">
                         <CardModalHeader />
                         <CardModalBody />
-                        <CardModalFooter insertRecord={props.insertRecord} updateRecord={props.updateRecord}/>
+                        <CardModalTags />
+                        <CardModalFooter />
                     </div>
                 </div>
             </div>

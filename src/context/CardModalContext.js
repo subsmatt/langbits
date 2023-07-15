@@ -10,7 +10,11 @@ const CardModalContext = createContext({
     modalCardDesc: "",
     setModalCardDesc: () => {},
     modalCardWordType: "",
-    setModalCardWordType: () => {}
+    setModalCardWordType: () => {},
+    tagNamesNewValue: "", 
+    setTagNamesNewValue: () => {},
+    modalCardTagIds: [], 
+    setModalCardTagIds: () => {}
 });
 
 function CardModalProvider({children, value}){
