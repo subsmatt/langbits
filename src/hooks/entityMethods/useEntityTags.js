@@ -6,7 +6,7 @@ function useEntityTags(){
     const {data, error, createRecord} = useGenCrudMethods(sampleTagsData);
 
     function createTagsAndMerge(tagIdsIn, tagNamesInString){
-        if(!tagIdsIn && !tagNamesInString) return undefined;
+        if(!tagIdsIn && !tagNamesInString) return [];
 
         const tagNamesIn = tagNamesInString ? tagNamesInString.split(",").filter(t => t && t.length > 0) : [];
         const tagIds = tagIdsIn ? [...tagIdsIn] : [];

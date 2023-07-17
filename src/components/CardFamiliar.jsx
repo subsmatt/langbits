@@ -5,6 +5,7 @@ function CardFamiliar(props){
     const [inTransition, setInTransition] =  useState(false);
     const {updateCard} = useContext(CardsContext);
     const {rec} = props;
+    
     function doneCallback(){
         //console.log(`CardFamiliar:doneCallback ${new Date().getMilliseconds()}`);
         setInTransition(false);

@@ -50,33 +50,10 @@ function useEntityCards() {
         };
 
         updateRecord(aoRecord.id, updatedRecord);
-        
-        //// check if Attributes record exists
-        //const cardAttributes = cardAttributesData.find(rec => rec.cardId === aoRecord.id);
-        //if (cardAttributes){
-        //    updateCardAttributesData(cardAttributes.id, {
-        //        pinned: pinned === undefined ? undefined : Number(pinned),
-        //        important: important === undefined ? undefined : Number(important),
-        //        updateDate: new Date().toISOString()
-        //    });
-        //} else {
-        //    createCardAttributesData({
-        //        id: uuidv4(),
-        //        cardId: aoRecord.id,
-        //        pinned: pinned === undefined ? undefined : Number(pinned),
-        //        important: important === undefined ? undefined : Number(important),
-        //        updateDate: new Date().toISOString()
-        //    });
-        //}
     }
 
     function deleteCardEntity(asId) {
         deleteRecord(asId);
-
-        //// delete any associated Attribute records
-        //cardAttributesData
-        //.filter(rec => rec.cardId === asId)
-        //.forEach(rec => deleteCardAttributesData(rec.id));
     }
 
     return {data, error, createCardEntity, updateCardEntity, deleteCardEntity};

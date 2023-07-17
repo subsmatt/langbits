@@ -25,7 +25,7 @@ function CardChangeLogs(){
                     <tbody>
                         {[...cardsData].map(function(card){
                             return (
-                                <tr key={card.id} className={card.id === selectedCardId ? "table-primary" : ""} onClick={() => {console.log(`select card id[${card.id}]`);setSelectedCardId(card.id);}}>
+                                <tr key={card.id} className={card.id === selectedCardId ? "table-primary" : ""} onClick={() => { setSelectedCardId(card.id); }}>
                                     <td>{card.word}</td>
                                     <td>{card.desc}</td>
                                 </tr>

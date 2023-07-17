@@ -1,12 +1,9 @@
 import {ControlPanelContext} from "../context/ControlPanelContext";
 import { CardsContext } from "../context/CardsContext";
-import { createContext, useContext } from "react";
+import { useContext } from "react";
 import Card from "./Card";
 import CardAdd from "./CardAdd";
-import useRestRequest, {REQUEST_STATUS} from "../hooks/useCards";
 import CardModal from "./CardModal/CardModal";
-
-
 
 function CardList() {
     const {searchQuery, searchType} = useContext(ControlPanelContext);
@@ -30,16 +27,11 @@ function CardList() {
         );
     }
 
+    // Select 'Pinned' cards, so that they can be displayed at the top of the page
     const cardsPinned = cardAttributesData.filter(rec => rec.pinned === 1)
     .map(rec => rec.cardId);
 
-    function sortByDescLength(a, b){
-        const descA = a.desc ? a.desc.length : 0;
-        const descB = b.desc ? b.desc.length : 0;
-
-        return descA > descB ? -1 : descA < descB ? 1 : 0;
-    }
-
+    // Sort records
     function sortByDesc(a, b) {
         return a.desc < b.desc ? -1 : a.desc > b.desc ? 1 : 0;
     }
@@ -48,6 +40,8 @@ function CardList() {
         <>
             {cardsData && <CardModal />}
             <CardAdd/>
+
+            {/* Display 'Pinned' cards */}
             <div className="row">
                 {cardsData.filter(n => cardsPinned.includes(n.id))
                     .filter(function(rec){
@@ -66,7 +60,11 @@ function CardList() {
                     })
                 }
             </div>
+
+            {/* Display horizontal line to separate 'Pinned' and 'Unpinned' cards */}
             {cardsPinned.length > 0 ? <hr/> : null}
+
+            {/* Display 'Unpinned' cards */}
             <div className="row">
                 {cardsData.filter(n => !cardsPinned.includes(n.id))
                     .filter(function(rec){

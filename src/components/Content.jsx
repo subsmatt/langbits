@@ -3,12 +3,12 @@ import CardList from "./CardList";
 import CardChangeLogs from "./CardChangeLogs";
 import useCardModal from "../hooks/useCardModal";
 import useCards from "../hooks/useCards";
-import { CardModalContext, CardModalProvider } from "../context/CardModalContext";
-import { CardsContext, CardsProvider } from "../context/CardsContext";
+import { CardModalContext } from "../context/CardModalContext";
+import { CardsContext } from "../context/CardsContext";
 import { useState } from "react";
 
 function Content(){
-    const [currentTab, setCurrentTab] = useState("cards"); // ["cards", "logs"]
+    const [currentTab, setCurrentTab] = useState("cards"); // expected values ["cards", "logs"]
     const contextValueCardModal = useCardModal();    
     const contextValueCards = useCards();
 

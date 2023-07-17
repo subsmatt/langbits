@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function useEntityChangeLogs() {
     const {data, error, createRecord} = useGenCrudMethods(sampleChangeLogs);
-    console.log(`useEntityChangeLogs: data[${sampleChangeLogs.length}]`);
+    
     function createCardChangeLogEntity(cardId, operation){
         createRecord({
             id: uuidv4(),

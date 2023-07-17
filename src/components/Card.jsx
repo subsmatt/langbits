@@ -1,8 +1,7 @@
-import {CardModalContext} from "../context/CardModalContext";
-import { CardContext, CardProvider } from "../context/CardContext";
+import { CardModalContext } from "../context/CardModalContext";
+import { CardsContext } from "../context/CardsContext";
 import { useContext } from "react";
 import CardFamiliar from "./CardFamiliar";
-import { CardsContext } from "../context/CardsContext";
 
 function Card(props) {
     const {rec} = props;

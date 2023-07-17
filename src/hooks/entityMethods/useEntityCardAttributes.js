@@ -8,6 +8,7 @@ function useEntityCardAttributes() {
     function updateCardAttributesEntity(cardId, pinned, important){
         // check if Attributes record exists
         const cardAttributes = data.find(rec => rec.cardId === cardId);
+        
         if (cardAttributes){
             updateRecord(cardAttributes.id, {
                 pinned: pinned === undefined ? undefined : Number(pinned),

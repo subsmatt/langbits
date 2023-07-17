@@ -2,7 +2,7 @@ import Header from "./Header";
 import ControlPanel from "./ControlPanel";
 import Content from "./Content";
 import useControlPanel from "../hooks/useControlPanel";
-import { ControlPanelContext, ControlPanelProvider } from "../context/ControlPanelContext";
+import { ControlPanelContext } from "../context/ControlPanelContext";
 
 function LangBitsApp() {
     const contextValueControlPanel = useControlPanel();

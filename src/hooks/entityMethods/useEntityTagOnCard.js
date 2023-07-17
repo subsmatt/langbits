@@ -9,14 +9,11 @@ function useEntityTagOnCard(){
         if(!tagIdsToSet && !cardId){
             return;
         }
-        console.log(`sms>updateCardTags cardId[${cardId}]`);
+        
         const tagIdsOnCard = data.filter(rec => rec.cardId === cardId).map(rec => rec.tagId);
-        console.log(`sms>tagIdsOnCard length[${tagIdsOnCard.length}]`);
         const tagIdsToAdd  = tagIdsToSet.filter(tagId => !tagIdsOnCard.includes(tagId));
-        console.log(`sms>tagIdsToAdd length[${tagIdsToAdd.length}]`);
         const tagIdsToDelete = tagIdsOnCard.filter(tagId => !tagIdsToSet.includes(tagId));
-        console.log(`sms>tagIdsToDelete length[${tagIdsToDelete.length}]`);
-
+        
         tagIdsToAdd.forEach(tagId => {
             createRecord({
                 id: uuidv4(),
