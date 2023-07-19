@@ -2,8 +2,6 @@ import {ControlPanelContext} from "../context/ControlPanelContext";
 import { CardsContext } from "../context/CardsContext";
 import { useContext } from "react";
 import Card from "./Card";
-import CardAdd from "./CardAdd";
-import CardModal from "./CardModal/CardModal";
 
 function CardList() {
     const {searchQuery, searchType} = useContext(ControlPanelContext);
@@ -38,9 +36,6 @@ function CardList() {
 
     return (
         <>
-            {cardsData && <CardModal />}
-            <CardAdd/>
-
             {/* Display 'Pinned' cards */}
             <div className="row">
                 {cardsData.filter(n => cardsPinned.includes(n.id))

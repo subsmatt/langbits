@@ -1,8 +1,8 @@
 function Menu({currentTab, setCurrentTab}) {
     function TabItem({tabValue, tabText}){
         const tabClass = tabValue === currentTab
-        ? "nav-link btn-primary rounded-pill d-flex align-items-center px-3 active"
-        : "nav-link btn-primary rounded-pill d-flex align-items-center px-3";
+        ? "nav-link active"
+        : "nav-link";
 
         return (
             <li className="nav-item ml-auto">
@@ -15,10 +15,12 @@ function Menu({currentTab, setCurrentTab}) {
     }
 
     return (
-        <ul className="nav nav-pills p-3 bg-white mb-3 founded-pill align-items-center">
-            <TabItem tabValue="cards" tabText="All Cards"/>
-            <TabItem tabValue="logs" tabText="Change Logs"/>
-        </ul>
+        <div className="border p-2">
+            <ul className="nav nav-pills">
+                <TabItem tabValue="cards" tabText="All Cards"/>
+                <TabItem tabValue="logs" tabText="Change Logs"/>
+            </ul>
+        </div>
     );
 }
 
