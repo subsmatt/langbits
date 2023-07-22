@@ -1,7 +1,7 @@
 import { CardModalContext } from "../context/CardModalContext";
 import { CardsContext } from "../context/CardsContext";
 import { useContext } from "react";
-import CardFamiliar from "./CardFamiliar";
+import { v4 as uuidv4 } from "uuid";
 
 function Card(props) {
     const {rec} = props;
@@ -58,16 +58,19 @@ function Card(props) {
         })
         : [];
 
+    const tempId = uuidv4();
+
     function CardTagsSection() {
         return (
-            <div className="row margin-left-right-15">
+            <div className="d-flex">
                 {
                     cardTags.map(cardTag => {
+                        
                         return (
                             <div key={cardTag.id}>
-                                <span className="textbox-tag">
+                                <span className="textbox-tag small">
                                     {cardTag.tagName}&nbsp;
-                                    <a href="#" className="text-decoration-none" onClick={() => {
+                                    <a href="#" className="text-decoration-none fa me-2" onClick={() => {
                                         const tagIdsForCard = cardTags.filter(r => r.tagId !== cardTag.tagId).map(t => t.tagId);
                                         updateCard(rec, undefined, undefined, undefined, tagIdsForCard, undefined);
                                     }}>{" "}<i className="icon fa fa-times-circle"></i></a>{" "}
@@ -83,22 +86,21 @@ function Card(props) {
     return (
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 my-4" key={rec.id}>
             <div className={`card p-2`}>
-                <div className="card-title">
-                    <h5>{rec.word}</h5>
-                    <a href="#" onClick={() => { updateCard(rec, undefined, !cardPinned, cardImportant); }}>
+                <div className="card-title d-flex flex-row justify-content-between mb-0">
+                    <h5 className="ms-2">{rec.word}</h5>
+                    <a href="#" className="me-2" onClick={() => { updateCard(rec, undefined, !cardPinned, cardImportant); }}>
                         <i className={
                             cardPinned ? "float-right fas fa-thumbtack fa-lg text-info"
                             : "float-right fas fa-thumbtack fa-rotate-90"
                         }></i>
                     </a>
                 </div>
-                <div className="card-body">
-                    <span>{rec.desc}</span>
-                    <div className="my-1">
+                <div className="card-body py-2">
+                    <div className="mb-2">{rec.desc}</div>
+                    {/* <div className="my-1">
                         <b>{rec.type}</b>{" "}{rec.tags.toString()}
-                    </div>
-                    <CardFamiliar rec={rec}/>
-                    <div className="margin-top-10">
+                    </div> */}
+                    <div className="">
                         <CardTagsSection />
                     </div>
                 </div>

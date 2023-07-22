@@ -13,8 +13,6 @@ function useEntityCards() {
         "type": "unknown",
         "hits": 0,
         "examples": [],
-        "familiar": false,
-        "iknowthis": false,
         "createDate": "DefaultDate"
     };
     
