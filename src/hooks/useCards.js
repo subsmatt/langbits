@@ -4,40 +4,40 @@ import useEntityChangeLogs from "./entityMethods/useEntityChageLogs";
 import useEntityTags from "./entityMethods/useEntityTags";
 import useEntityTagOnCard from "./entityMethods/useEntityTagOnCard";
 
-function useCards() {
+function useCards(errorNotificationFn) {
     const {
         data: cardsData,
         error: cardsDataError,
         createCardEntity,
         updateCardEntity,
         deleteCardEntity,
-    } = useEntityCards();
+    } = useEntityCards("/api/cards", errorNotificationFn);
 
     const {
         data: cardAttributesData,
         error: cardAttributesDataError,
         updateCardAttributesEntity,
         deleteCardAttributesEntity,
-    } = useEntityCardAttributes();
+    } = useEntityCardAttributes("/api/cardattributes", errorNotificationFn);
 
     const {
         data: cardChangeLogsData,
         error: cardChangeLogsError,
         createCardChangeLogEntity
-    } = useEntityChangeLogs();
+    } = useEntityChangeLogs("/api/changelogs", errorNotificationFn);
 
     const {
         data: tagsData,
         error: tagsDataError,
         createTagsAndMerge
-    } = useEntityTags();
+    } = useEntityTags("/api/tags", errorNotificationFn);
 
     const {
         data: tagOnCardData,
         error: tagOnCardDataError,
         updateCardTags,
         deleteTagOnCardByCardId
-    } = useEntityTagOnCard();
+    } = useEntityTagOnCard("/api/tagoncard", errorNotificationFn);
 
     function createCard(aoRec, tagIdsIn, tagNamesIn, doneCallback){
         const lsFuncName = "useCard>createCard";
@@ -80,7 +80,7 @@ function useCards() {
 
     function deleteCard(asId, doneCallback){
         const lsFuncName = "useCard>deleteCard";
-        
+        console.log(`${lsFuncName} asId[${asId}]`);
         // Check if Id is valid
         if(asId) {
             deleteCardEntity(asId);

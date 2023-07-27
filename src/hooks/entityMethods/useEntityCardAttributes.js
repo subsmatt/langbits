@@ -1,9 +1,9 @@
 import useGenCrudMethods from "../useGenCrudMethods";
 import { sampleAttributesData } from "../../data/sampleAttributesData";
-import { v4 as uuidv4 } from "uuid";
+import MongoId from "mongoid-js";
 
-function useEntityCardAttributes() {
-    const {data, error, createRecord, updateRecord, deleteRecord} =  useGenCrudMethods(sampleAttributesData);
+function useEntityCardAttributes(url, errorNotificationFn) {
+    const {data, error, createRecord, updateRecord, deleteRecord} =  useGenCrudMethods(url, errorNotificationFn, sampleAttributesData);
 
     function updateCardAttributesEntity(cardId, pinned, important){
         // check if Attributes record exists
@@ -11,16 +11,16 @@ function useEntityCardAttributes() {
         
         if (cardAttributes){
             updateRecord(cardAttributes.id, {
-                pinned: pinned === undefined ? undefined : Number(pinned),
-                important: important === undefined ? undefined : Number(important),
+                pinned: pinned === undefined ? 0 : Number(pinned),
+                important: important === undefined ? 0 : Number(important),
                 updateDate: new Date().toISOString()
             });
         } else {
-            createRecord({
-                id: uuidv4(),
+            createRecord(url, {
+                id: MongoId.mongoid(),
                 cardId: cardId,
-                pinned: pinned === undefined ? undefined : Number(pinned),
-                important: important === undefined ? undefined : Number(important),
+                pinned: pinned === undefined ? 0 : Number(pinned),
+                important: important === undefined ? 0 : Number(important),
                 updateDate: new Date().toISOString()
             });
         }

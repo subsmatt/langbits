@@ -1,9 +1,9 @@
 import useGenCrudMethods from "../useGenCrudMethods";
 import { sampleTagOnCardData } from "../../data/sampleTagOnCard";
-import { v4 as uuidv4 } from "uuid";
+import MongoId from "mongoid-js";
 
-function useEntityTagOnCard(){
-    const {data, error, createRecord, deleteRecord} = useGenCrudMethods(sampleTagOnCardData);
+function useEntityTagOnCard(url, errorNotificationFn){
+    const {data, error, createRecord, deleteRecord} = useGenCrudMethods(url, errorNotificationFn, sampleTagOnCardData);
     
     function updateCardTags(tagIdsToSet, cardId){
         if(!tagIdsToSet && !cardId){
@@ -15,8 +15,8 @@ function useEntityTagOnCard(){
         const tagIdsToDelete = tagIdsOnCard.filter(tagId => !tagIdsToSet.includes(tagId));
         
         tagIdsToAdd.forEach(tagId => {
-            createRecord({
-                id: uuidv4(),
+            createRecord(url, {
+                id: MongoId.mongoid(),
                 cardId,
                 tagId,
                 createdAt: new Date().toISOString()

@@ -1,9 +1,9 @@
 import useGenCrudMethods from "../useGenCrudMethods";
 import { sampleTagsData } from "../../data/sampleTags";
-import { v4 as uuidv4 } from "uuid";
+import MongoId from "mongoid-js";
 
-function useEntityTags(){
-    const {data, error, createRecord} = useGenCrudMethods(sampleTagsData);
+function useEntityTags(url, errorNotificationFn){
+    const {data, error, createRecord} = useGenCrudMethods(url, errorNotificationFn, sampleTagsData);
 
     function createTagsAndMerge(tagIdsIn, tagNamesInString){
         if(!tagIdsIn && !tagNamesInString) return [];
@@ -22,8 +22,8 @@ function useEntityTags(){
                     tagIds.push(id);
                 }
             } else {
-                const tagIdNew = uuidv4();
-                createRecord({
+                const tagIdNew = MongoId.mongoid();
+                createRecord(url, {
                     id: tagIdNew, tagName: tag
                 });
                 tagIds.push(tagIdNew);

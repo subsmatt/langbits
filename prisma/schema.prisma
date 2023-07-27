@@ -1,0 +1,47 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url = env("MONGODB_CONNECTION_STRING")
+}
+
+model Cards {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    lang String
+    word String
+    desc_lang String
+    desc String
+    type String
+    hits Int?
+    examples String[]
+    iknowthis Boolean?
+}
+
+model ChangeLogs {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    cardId String
+    operation String
+    changeDate String?
+}
+
+model CardAttributes {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    cardId String
+    important Int
+    pinned Int
+    updateDate String
+}
+
+model TagOnCard {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    tagId String
+    cardId String
+    createdAt String
+}
+
+model Tags {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    tagName String
+}

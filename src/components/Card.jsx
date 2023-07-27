@@ -72,7 +72,7 @@ function Card(props) {
                                     {cardTag.tagName}&nbsp;
                                     <a href="#" className="text-decoration-none fa me-2" onClick={() => {
                                         const tagIdsForCard = cardTags.filter(r => r.tagId !== cardTag.tagId).map(t => t.tagId);
-                                        updateCard(rec, undefined, undefined, undefined, tagIdsForCard, undefined);
+                                        updateCard(rec, undefined, cardPinned, cardImportant, tagIdsForCard, undefined);
                                     }}>{" "}<i className="icon fa fa-times-circle"></i></a>{" "}
                                 </span>
                             </div>
@@ -97,6 +97,7 @@ function Card(props) {
                 </div>
                 <div className="card-body py-2">
                     <div className="mb-2">{rec.desc}</div>
+                    <div className="mb-2">{rec.id}</div>
                     {/* <div className="my-1">
                         <b>{rec.type}</b>{" "}{rec.tags.toString()}
                     </div> */}
