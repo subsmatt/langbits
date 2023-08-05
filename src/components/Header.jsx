@@ -1,14 +1,24 @@
+import { useSession, signIn, signOut } from "next-auth/react";
+
 function Header(){
     const theme = "light";
 
-    function NotLoggedIn(){
+    function LogInBtn(){
+        const { data: session } = useSession();
+        if (session) {
+            return (
+            <>
+                <button className="btn btn-outline-info float-end" onClick={() => signOut({callbackUrl: "/"})}>Sign out</button>
+                <p>Signed in as {session.user.email}</p>
+            </>
+            );
+        }
         return (
-            <div>
-                <button className="btn btn-secondary" disabled={true} onClick={(e) => {
-                    e.preventDefault();
-                    const username = window.prompt("Enter Login Name:", "");
-                }}>Log In</button>
-            </div>
+            <>
+              {/* pass 2 additional args to force user to provide credentials */}
+              {/* <button className="btn btn-outline-info float-end" onClick={() => signIn("auth0", null, { prompt: "login" })}>Sign in</button> */}
+              <button className="btn btn-outline-info float-end" onClick={() => signIn("auth0")}>Sign in</button>
+            </>
         );
     }
 
@@ -23,7 +33,7 @@ function Header(){
                 </h4>
             </div>
             <div className="text-info my-auto">
-                <NotLoggedIn/>
+                <LogInBtn/>
             </div>
         </div>
     );

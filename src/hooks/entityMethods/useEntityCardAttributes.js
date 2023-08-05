@@ -10,11 +10,14 @@ function useEntityCardAttributes(url, errorNotificationFn) {
         const cardAttributes = data.find(rec => rec.cardId === cardId);
         
         if (cardAttributes){
-            updateRecord(cardAttributes.id, {
-                pinned: pinned === undefined ? 0 : Number(pinned),
-                important: important === undefined ? 0 : Number(important),
-                updateDate: new Date().toISOString()
-            });
+            if (pinned !== undefined && important !== undefined) {
+                // console.log(`updateCardAttributesEntity pinned[${Number(pinned)}] important[${Number(important)}]`);
+                updateRecord(cardAttributes.id, {
+                    pinned: Number(pinned),
+                    important: Number(important),
+                    updateDate: new Date().toISOString()
+                });
+            }
         } else {
             createRecord(url, {
                 id: MongoId.mongoid(),

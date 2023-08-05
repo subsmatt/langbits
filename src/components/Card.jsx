@@ -97,7 +97,6 @@ function Card(props) {
                 </div>
                 <div className="card-body py-2">
                     <div className="mb-2">{rec.desc}</div>
-                    <div className="mb-2">{rec.id}</div>
                     {/* <div className="my-1">
                         <b>{rec.type}</b>{" "}{rec.tags.toString()}
                     </div> */}

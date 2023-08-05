@@ -13,7 +13,7 @@ function errorNotificationFn(errorMessage) {
 function Content(){
     const [currentTab, setCurrentTab] = useState("cards"); // expected values ["cards", "logs"]   
     const contextValueCards = useCards(errorNotificationFn);
-
+    
     return (
         <CardsContext.Provider value={contextValueCards}>
             <CardModal />

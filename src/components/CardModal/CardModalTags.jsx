@@ -17,7 +17,7 @@ function CardModalTags(){
                             tagsData ? [...tagsData].map(rec => {
                                 return (
                                     <div className="mx-2" key={rec.id}>
-                                        <input className="form-check-input" type="checkbox" id={`formchecklabelid-${rec.id}`}
+                                        <input className="form-check-input me-1" type="checkbox" id={`formchecklabelid-${rec.id}`}
                                             onChange={(e) => {
                                                 if(e.target.checked){
                                                     setModalCardTagIds([...modalCardTagIds, rec.id]);

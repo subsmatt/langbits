@@ -1,4 +1,8 @@
+import { useSession } from "next-auth/react";
+
 function Menu({currentTab, setCurrentTab}) {
+    const {data: session} = useSession();
+    
     function TabItem({tabValue, tabText}){
         const tabClass = tabValue === currentTab
         ? "nav-link active"
@@ -18,7 +22,7 @@ function Menu({currentTab, setCurrentTab}) {
         <div className="border p-2">
             <ul className="nav nav-pills">
                 <TabItem tabValue="cards" tabText="All Cards"/>
-                <TabItem tabValue="logs" tabText="Change Logs"/>
+                {session && (<TabItem tabValue="logs" tabText="Change Logs"/>)}
             </ul>
         </div>
     );

@@ -7,7 +7,6 @@ function useGenCrudMethods(url, errorNotificationFn, initData) {
     const [error, setError] = useState("");
     const [validateDate, setValidateDate] = useState(new Date());
 
-    //console.log(`sms>useGenCrudMethods url[${url}] initData[${initData}]`);
     if((!url || url.length === 0) && !initData) {
         throw "useGenCrudMethods NO URL passed in";
     }
@@ -31,8 +30,7 @@ function useGenCrudMethods(url, errorNotificationFn, initData) {
             // );
             try {
                 if (url && url !== "skip") {
-                    const results = await axios.get(url);
-                    console.log(`sms>useGenCrudMethods results.data.length[${results.data.length}]`);
+                    const results = await axios.get(url);                    
                     setData(results.data);
                 } else {
                     setData(initData);
@@ -50,7 +48,6 @@ function useGenCrudMethods(url, errorNotificationFn, initData) {
     function createRecord(url, createObject) {
         async function addData(){
             try {
-                console.log(`sms>useGenCrudMethod createRecord url[${url}]`);
                 await axios.post(url, createObject);
                 setData(function(originalData){
                     return [...originalData, createObject];
@@ -84,14 +81,12 @@ function useGenCrudMethods(url, errorNotificationFn, initData) {
                 errorNotificationFn?.(errorString);
                 validate();
             }
-
         }
 
         updateData();
     }
 
     function deleteRecord(id) {
-        console.log(`useGenCrudMethod>deleteRecord id[${id}]`);
         async function deleteData(){
             try {
                 await axios.delete(`${url}/${id}`);
@@ -104,7 +99,6 @@ function useGenCrudMethods(url, errorNotificationFn, initData) {
                 errorNotificationFn?.(errorString);
                 validate();
             }
-
         }
 
         deleteData();
