@@ -1,7 +1,6 @@
 import { CardModalContext } from "../context/CardModalContext";
 import { CardsContext } from "../context/CardsContext";
 import { useContext } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 function Card(props) {
     const {rec} = props;
@@ -58,8 +57,6 @@ function Card(props) {
         })
         : [];
 
-    const tempId = uuidv4();
-
     function CardTagsSection() {
         return (
             <div className="d-flex">
@@ -97,9 +94,6 @@ function Card(props) {
                 </div>
                 <div className="card-body py-2">
                     <div className="mb-2">{rec.desc}</div>
-                    {/* <div className="my-1">
-                        <b>{rec.type}</b>{" "}{rec.tags.toString()}
-                    </div> */}
                     <div className="">
                         <CardTagsSection />
                     </div>

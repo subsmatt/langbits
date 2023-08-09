@@ -25,9 +25,6 @@ function useGenCrudMethods(url, errorNotificationFn, initData) {
 
     useEffect(() => {
         async function getData() {
-            // await new Promise((resolve) => 
-            //     setTimeout(resolve, delayMs)
-            // );
             try {
                 if (url && url !== "skip") {
                     const results = await axios.get(url);                    

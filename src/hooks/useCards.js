@@ -57,7 +57,7 @@ function useCards(errorNotificationFn) {
 
     function updateCard(aoRec, doneCallback, pinned, important, tagIdsIn, tagNamesIn){
         const lsFuncName = "useCard>updateCard";
-        // console.log(`${lsFuncName}: pinned[${pinned}] important[${important}]`);
+        
         if (aoRec && aoRec.id) {
             updateCardEntity(aoRec);
             updateCardAttributesEntity(aoRec.id, pinned, important);
@@ -80,7 +80,6 @@ function useCards(errorNotificationFn) {
 
     function deleteCard(asId, doneCallback){
         const lsFuncName = "useCard>deleteCard";
-        // console.log(`${lsFuncName} asId[${asId}]`);
         
         // Check if Id is valid
         if(asId) {

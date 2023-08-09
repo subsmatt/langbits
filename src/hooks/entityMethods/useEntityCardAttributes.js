@@ -11,7 +11,6 @@ function useEntityCardAttributes(url, errorNotificationFn) {
         
         if (cardAttributes){
             if (pinned !== undefined && important !== undefined) {
-                // console.log(`updateCardAttributesEntity pinned[${Number(pinned)}] important[${Number(important)}]`);
                 updateRecord(cardAttributes.id, {
                     pinned: Number(pinned),
                     important: Number(important),

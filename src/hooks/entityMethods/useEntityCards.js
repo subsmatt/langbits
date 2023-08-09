@@ -2,17 +2,6 @@ import useGenCrudMethods from "../useGenCrudMethods";
 import MongoId from "mongoid-js";
 
 function useEntityCards(url, errorNotificationFn) {
-    // id String @id @default(auto()) @map("_id") @db.ObjectId
-    // lang String
-    // word String
-    // desc_lang String
-    // desc String
-    // type String
-    // hits Int
-    // examples String[]
-    // iknowthis Boolean
-    // createDate String?
-
     const schemaRecord = {
         "id": "0",
         "lang": "es",
@@ -23,7 +12,6 @@ function useEntityCards(url, errorNotificationFn) {
         "hits": 0,
         "examples": [],
         "iknowthis": false
-        //"createDate": "DefaultDate"
     };
     
     const {
@@ -41,7 +29,6 @@ function useEntityCards(url, errorNotificationFn) {
             word: aoRecord.word ? aoRecord.word : "unknown word",
             desc: aoRecord.desc ? aoRecord.desc : "unknown desc",
             type: aoRecord.type ? aoRecord.type : "unknown"
-            //createDate: new Date().toISOString()
         };
 
         createRecord("/api/cards", newRecord);
