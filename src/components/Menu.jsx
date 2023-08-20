@@ -19,12 +19,19 @@ function Menu({currentTab, setCurrentTab}) {
     }
 
     return (
-        <div className="border p-2">
-            <ul className="nav nav-pills">
-                <TabItem tabValue="cards" tabText="All Cards"/>
-                {session && (<TabItem tabValue="logs" tabText="Change Logs"/>)}
-            </ul>
-        </div>
+        <nav className="navbar navbar-expand-md">
+            {/* <button className="navbar-toggler" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button> */}
+            <div className="collapse navbar-collapse border p-2" id="navbarCollapse">
+                <ul className="nav nav-pills">
+                    <TabItem tabValue="cards" tabText="All Cards"/>
+                    {session && (<TabItem tabValue="logs" tabText="Change Logs"/>)}
+                </ul>
+            </div>
+        </nav>
     );
 }
 

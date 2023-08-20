@@ -23,7 +23,7 @@ function CardAdd(){
     }
 
     return (
-        <button className="btn btn-secondary" onClick={() => createCard()}>Add new card <i className="fa fa-plus"></i></button>
+        <button className="btn btn-secondary" onClick={() => createCard()}>Add card <i className="fa fa-plus"></i></button>
     );
 }
 

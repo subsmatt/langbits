@@ -1,4 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 
 function Header(){
     const theme = "light";
@@ -25,7 +26,7 @@ function Header(){
     return (
         <div className="d-flex justify-content-between p-1">
             <div>
-                <img src={`/images/subsmatt_logo_${theme}_theme.png`} alt="Subsmatt"/>
+                <Image src={`/images/subsmatt_logo_${theme}_theme.png`} width="127" height="76" alt="Subsmatt"/>
             </div>
             <div className="my-auto pt-1">
                 <h4 className="header-title my-auto">
